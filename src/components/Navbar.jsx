@@ -7,8 +7,8 @@ const Navbar = () => {
         <nav className='flex justify-between items-center bg-white top-0 sticky p-5'>
             {/* left menu */}
             <ul className='flex gap-3'>
-                <Link href={'/'}><li>Home</li></Link>
-                <Link href={'/destinations'}><li>Destinations</li></Link>
+                <li><Link href={'/'}>Home</Link></li>
+                <li><Link href={'/add-destination'}>Destinations</Link></li>
             </ul>
 
             {/* logo div */}
@@ -25,8 +25,8 @@ const Navbar = () => {
             {/* right menu */}
             <div className="">
                 <ul className='flex gap-3'>
-                    <Link href={'/login'}><li>Login</li></Link>
-                    <Link href={'/signup'}><li>Signup</li></Link>
+                    <li><Link href={'/login'}>Login</Link></li>
+                    <li><Link href={'/signup'}>Signup</Link></li>
                 </ul>
             </div>
         </nav>
