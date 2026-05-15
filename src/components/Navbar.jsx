@@ -8,7 +8,8 @@ const Navbar = () => {
             {/* left menu */}
             <ul className='flex gap-3'>
                 <li><Link href={'/'}>Home</Link></li>
-                <li><Link href={'/add-destination'}>Destinations</Link></li>
+                <li><Link href={'/destinations'}>Destinations</Link></li>
+                <li><Link href={'/add-destination'}>Add Destinations</Link></li>
             </ul>
 
             {/* logo div */}
