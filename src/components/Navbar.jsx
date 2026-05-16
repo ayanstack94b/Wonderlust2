@@ -19,7 +19,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='flex justify-between items-center bg-white top-0 sticky p-5'>
+        <nav className='flex justify-between items-center sticky top-0 z-50 bg-white/90 backdrop-blur-md p-5 border-b border-gray-200'>
             {/* left menu */}
             <ul className='flex gap-3'>
                 <li><Link href={'/'}>Home</Link></li>

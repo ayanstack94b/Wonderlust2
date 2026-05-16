@@ -147,7 +147,7 @@ const DestinationDetailPage = async ({ params }) => {
                     {/* Right Sidebar */}
                     <div className="sticky top-10">
 
-                        <BookingCard />
+                        <BookingCard destination={destination} />
 
                     </div>
 
