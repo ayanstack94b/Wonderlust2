@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { IoTimeOutline } from 'react-icons/io5';
 import { LuMapPin } from 'react-icons/lu';
-
+import toast, { Toaster } from "react-hot-toast";
 const BookingCard = ({ destination }) => {
     const { data: session } = authClient.useSession()
     const user = session?.user
@@ -39,6 +39,7 @@ const BookingCard = ({ destination }) => {
         })
         const data = await res.json()
         console.log(data);
+        toast.success('Booking done')
     }
 
     return (
