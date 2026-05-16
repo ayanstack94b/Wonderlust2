@@ -1,21 +1,46 @@
 "use client"
-import { Button, DatePicker } from '@heroui/react';
-import React from 'react';
+import { authClient } from '@/lib/auth-client';
+import { Button, DateField, Label } from '@heroui/react';
+import React, { useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { IoTimeOutline } from 'react-icons/io5';
 import { LuMapPin } from 'react-icons/lu';
 
 const BookingCard = ({ destination }) => {
-    const {
-        destinationName,
-        country,
-        category,
-        price,
-        duration,
-        departureDate,
-        imageUrl,
-        description
-    } = destination;
+    const { data: session } = authClient.useSession()
+    const user = session?.user
+    const { destinationName, country, category, price, duration, departureDates, imageUrl, description } = destination;
+
+    const [departureDate, setDepartureDate] = useState(null)
+
+    const handleBooking = async () => {
+        if (!user) {
+            alert("Please login first");
+            return;
+        }
+        const bookingData = {
+            userId: user?.id,
+            userImage: user?.image,
+            userName: user?.name,
+            destinationId: destination?._id,
+            destinationName,
+            price,
+            imageUrl,
+            departureDate: new Date(departureDate)
+        }
+        console.log(bookingData);
+
+        const res = await fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingData)
+        })
+        const data = await res.json()
+        console.log(data);
+    }
+
     return (
         <div className="bg-white rounded-[28px] shadow-xl border border-gray-200 p-7 space-y-7">
 
@@ -87,16 +112,17 @@ const BookingCard = ({ destination }) => {
             {/* Date Picker */}
             <div className="space-y-3">
 
-                <p className="font-semibold text-gray-800">
-                    Select Travel Date
-                </p>
-
-                <DatePicker className="w-full" />
+                <DateField onChange={departureDate} className="w-[256px]" name="date">
+                    <Label>Departure Date</Label>
+                    <DateField.Group>
+                        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+                    </DateField.Group>
+                </DateField>
 
             </div>
 
             {/* CTA */}
-            <Button
+            <Button onClick={handleBooking}
                 className="w-full bg-cyan-500 hover:bg-cyan-600 text-white rounded h-14 text-lg font-semibold"
             >
                 Book Now
