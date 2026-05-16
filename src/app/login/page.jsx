@@ -1,11 +1,11 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { Button, Card, Description, FieldError, Form, Input, Label, Separator, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
-
 
      const onSubmit = async (e) => {
             e.preventDefault()
@@ -19,6 +19,8 @@ const LoginPage = () => {
                 password: user.password,
     
             })
+
+        
             console.log({ data, error });
     
             if (data) {
@@ -28,7 +30,10 @@ const LoginPage = () => {
                 alert('error', error)
             }
         }
-
+    const handleLoginGoogle = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        }) }
 
     return (
        <div className="max-w-7xl mx-auto min-h-[70vh] mt-10 ">
@@ -90,6 +95,11 @@ const LoginPage = () => {
        
                            </div>
                        </Form>
+                        <Separator></Separator>
+                                       <div className="whitespace-nowrap text-center my-2">Or</div>
+                                       <div className="">
+                                           <Button onClick={handleLoginGoogle} className={'w-full rounded-none'}><FcGoogle></FcGoogle> Signin With Google</Button>
+                                       </div>
                    </div>
        
                </div>
