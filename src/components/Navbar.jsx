@@ -14,13 +14,7 @@ const Navbar = () => {
 
             {/* logo div */}
             <div className="">
-                <Image
-                    src={'/assets/Wanderlast.png'}
-                    alt='logo'
-                    height={200}
-                    width={200}>
-
-                </Image>
+                <h1 className="text-5xl font-bold text-cyan-500">Wanderlust</h1>
             </div>
 
             {/* right menu */}
